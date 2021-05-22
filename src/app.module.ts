@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -24,6 +25,7 @@ const NODE_ENV = process.env.NODE_ENV;
       synchronize: true,
     }),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
