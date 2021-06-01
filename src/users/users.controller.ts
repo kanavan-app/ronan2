@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   UseInterceptors,
+  Query,
   ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
@@ -27,8 +28,8 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query('page') page, @Query('limit') limit) {
+    return this.usersService.findAll(page, limit);
   }
 
   @UseGuards(JwtAuthGuard)

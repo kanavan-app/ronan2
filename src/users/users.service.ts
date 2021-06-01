@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { paginate } from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UsersService {
@@ -18,8 +19,12 @@ export class UsersService {
     return results;
   }
 
-  async findAll() {
-    const users = await this.usersRepository.find();
+  async findAll(page: number, limit: number) {
+    const users = await paginate<User>(this.usersRepository, {
+      page,
+      limit,
+      route: process.env.API_PATH + '/users',
+    });
     return users;
   }
 
