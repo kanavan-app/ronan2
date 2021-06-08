@@ -2,10 +2,8 @@
 /dist
 /node_modules
 
-# ssl
-RootCA.crt
-RootCA.key
-RootCA.pem
+# zip
+ronan.zip
 
 # Logs
 logs

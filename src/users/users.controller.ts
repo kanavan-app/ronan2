@@ -27,8 +27,9 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
-  findAll(@Query('page') page, @Query('limit') limit) {
+  findAll(@Query('page') page = 1, @Query('limit') limit = 10) {
     return this.usersService.findAll(page, limit);
   }
 
