@@ -25,7 +25,8 @@ async function bootstrap() {
     .setDescription('The users API description')
     .setVersion('1.0')
     .build();
-  await app.register(compression);
+  app.setGlobalPrefix('api');
+  await app.register(compression, { encodings: ['gzip', 'deflate'] });
   await app.register(fastifyHelmet, {
     contentSecurityPolicy: {
       directives: {
@@ -35,7 +36,7 @@ async function bootstrap() {
         imgSrc: ['data:', "'self'"],
         scriptSrc: ["'unsafe-inline'", "'self'"],
         objectSrc: ['none'],
-        baseUri: ['none'],
+        baseUri: ["'self'"],
         frameAncestors: ['none'],
         frameSrc: ['none'],
         blockAllMixedContent: [],
@@ -48,7 +49,7 @@ async function bootstrap() {
     frameguard: true,
   });
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('docs', app, document);
   await app.listen(3000);
 }
 bootstrap();
